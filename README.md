@@ -181,7 +181,7 @@ Aqui ele já devolve para a nossa tabela de usuários o cluster a qual ele perte
 
 *Veja o processo no [04-análise-final](04-análise-final.ipynb)*
 
-![Usuários por Cluster](Imagens/usuarios-por-cluster.png)
+![Usuários por Cluster](Imagens/usuários-por-cluster.png)
 
 A clusterização com 5 grupos pelo K-means deu um resultado bastante interessante: um grande grupo com a maioria dos nossos usuários, dois menores quão quase todos os outros, e dois últimos com os "outliers".
 
