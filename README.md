@@ -1,3 +1,30 @@
+ ## Capítulos da Saga
+  - [Um pouco de contexto](#um-pouco-de-contexto)
+  - [O que queremos descobrir?](#o-que-queremos-descobrir)
+  - [Então o que vamos fazer?](#ento-o-que-vamos-fazer)
+  - [Fase 1: Importando os dados](#fase-1-importando-os-dados)
+  - [Fase 2: Preparando os dados](#fase-2-preparando-os-dados)
+  - [Fase 3: Análise exploratória](#fase-3-anlise-exploratria)
+  - [Fase 4: O número de grupos e o algoritmo](#fase-4-o-nmero-de-grupos-e-o-algoritmo)
+    - [Normalização](#normalizao)
+    - [Descobrindo o número de clusters](#descobrindo-o-nmero-de-clusters)
+    - [Rodando o K-means](#rodando-o-k-means)
+  - [Fase 5: Enfim, a tão esperada clusterização](#fase-5-enfim-a-to-esperada-clusterizao)
+    - [Macro-Grupo 1: Usuários Comuns (99% dos usuários)](#macro-grupo-1-usurios-comuns-99-dos-usurios)
+    - [1.1: Bounces (6568 usuários, 81%)](#11-bounces-6568-usurios-81)
+    - [1.2: Ocasionais (1230 usuários, 15%)](#12-ocasionais-1230-usurios-15)
+    - [1.3: Frequentes (210 usuários, 2.6%)](#13-frequentes-210-usurios-26)
+    - [Macro-Grupo 2: Outliers (>1% dos usuários)](#macro-grupo-2-outliers-1-dos-usurios)
+    - [2.1: Mini-Baleias (79 usuários, 0.9%)](#21-mini-baleias-79-usurios-09)
+    - [2.2: Baleias (5 usuários, 0.06%)](#22-baleias-5-usurios-006)
+  - [Eaí, quais os próximos passos?](#ea-quais-os-prximos-passos)
+    - [Refazer com dados mais frescos](#refazer-com-dados-mais-frescos)
+    - [Colocar o RFDV em produção](#colocar-o-rfdv-em-produo)
+    - [Cruzar com dados do formulário de signup](#cruzar-com-dados-do-formulrio-de-signup)
+    - [Partir para a pesquisa qualitativa](#partir-para-a-pesquisa-qualitativa)
+    - [Entender a questão do mobile](#entender-a-questo-do-mobile)
+    - [Brincar com mais features](#brincar-com-mais-features
+
 ## Um pouco de contexto
 
 O plano gratuito da [Leads2b](https://leads2b.com/) foi lançado publicamente em Fevereiro de 2020 e 7 meses depois, no início de Agosto, cerca de 15 mil pessoas já haviam criado uma conta.
@@ -78,7 +105,7 @@ Teoricamente tudo isso poderia ter sido feito direto na query da API, e ela já 
 
 **Feature Engineering: a criação do RFDV (Aqui começa o código desse GitHub!)**
 
-[Link para o 01.ipynb]
+*Veja o processo no [01-feature-engineering-RFDV](01-feature-engineering-RFDV.ipynb)*
 
 Começamos com as duas mais simples, Recência e Duração. Primeiramente transformando as datas que vieram do Mixpanel em UnixTime no formato de DateTime. 
 
@@ -86,7 +113,7 @@ Começamos com as duas mais simples, Recência e Duração. Primeiramente transf
 
 Para a Recência, tínhamos uma coluna já vinda do Mixpanel com a última data de acesso daquele usuário, então foi só comparar a distancia em dias dela com o fim da série histórica, no caso, dia 8 de Agosto.
 
-M**elhoria futura**: aqui fizemos a Recência considerando a última vez que o usuário foi visto pelo Mixpanel. Mas as vezes ele considera coisas simples como um descadastramento de recebimento de emails como "uso" do produto. Uma forma mais sofisticada de calcular isso seria analisar na tabela de eventos consolidados a última vez que o usuário fez um dos 12 eventos de engajamento. O mesmo se aplica a Duração.
+**Melhoria futura**: aqui fizemos a Recência considerando a última vez que o usuário foi visto pelo Mixpanel. Mas as vezes ele considera coisas simples como um descadastramento de recebimento de emails como "uso" do produto. Uma forma mais sofisticada de calcular isso seria analisar na tabela de eventos consolidados a última vez que o usuário fez um dos 12 eventos de engajamento. O mesmo se aplica a Duração.
 
 **Duração**
 
@@ -102,9 +129,11 @@ A última e mais complexa foi a Frequência, calcular em quantos dias distintos 
 
 ## Fase 3: Análise exploratória
 
+*Veja o processo no [02-análise-exploratória](02-análise-exploratória.ipynb)*
+
 Tendo nossos perfils e eventos limpinhos, hora de ouvir o que esses dados brutos podem nos dizer.
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ba7acdaa-66d0-412c-8a3d-b13c24482698/describe-do-RFDV.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ba7acdaa-66d0-412c-8a3d-b13c24482698/describe-do-RFDV.png)
+![Médias, Medianas, Quartis e Desvios](Imagens/describe-do-RFDV.png)
 
 Alguns insights:
 
@@ -115,6 +144,8 @@ Alguns insights:
 Mas sinceramente, nada muito interessante aqui, nada que já não tivéssemos intuído olhando para esses usuários no dia-a-dia.
 
 ## Fase 4: O número de grupos e o algoritmo
+
+*Veja o processo no [03-clusterizacao-kmeans](03-clusterizacao-kmeans.ipynb)*
 
 Vamos partir para o que interessa, ciência de dados real oficial, machine learning, artifical inteligence ™️, etc. 
 
@@ -136,7 +167,7 @@ O problema agora é descobrir quantos grupos vamos ter, o K do Kmeans é o núme
 
 No nosso caso fizemos o famoso "teste do cotovelo" usando a "inércia", basicamente ele roda o algorítmo várias vezes, começando com dois grupos e indo até o limite que você estabeleceu, e faz uma análise estatística de quanta variação tem dentro dos clusters em cada um desses testes. No geral, depois de uma certa quantidade de clusters, se você adicionar mais eles vão ficar todos muito parecidos, então o ponto ideal é logo depois desse "cotovelo", onde fatiar em mais grupos não vai mais ajudar a muito a entender as diferenças nos dados.
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8768be8c-dbc4-4e1c-bf19-2be6e4f90e25/teste-do-cotovelo.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8768be8c-dbc4-4e1c-bf19-2be6e4f90e25/teste-do-cotovelo.png)
+![O teste do Cotovelo](Imagens/teste-do-cotovelo.png)
 
 No nosso caso o teste do cotovelo deu como resultado por volta de 5 grupos, e é com isso que vamos ir.
 
@@ -148,11 +179,13 @@ Aqui ele já devolve para a nossa tabela de usuários o cluster a qual ele perte
 
 ## Fase 5: Enfim, a tão esperada clusterização
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc185d25-2355-4bc0-9192-1783985aa835/usuarios-por-cluster.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc185d25-2355-4bc0-9192-1783985aa835/usuarios-por-cluster.png)
+*Veja o processo no [04-análise-final](04-análise-final.ipynb)*
+
+![Usuários por Cluster](Imagens/usuarios-por-cluster.png)
 
 A clusterização com 5 grupos pelo K-means deu um resultado bastante interessante: um grande grupo com a maioria dos nossos usuários, dois menores quão quase todos os outros, e dois últimos com os "outliers".
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4affefaa-8bbf-400f-9b26-54b3199cf93f/volume-por-cluster.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4affefaa-8bbf-400f-9b26-54b3199cf93f/volume-por-cluster.png)
+![Volume por Cluster](Imagens/volume-por-cluster.png)
 
 A primeira coisa que salta aos olhos é que existe uma relação inversa entre quantos usuários tem no cluster e a média de volume de eventos. Ou seja, valida nossa hipótese que temos a maior parte dos usuários fazendo bem poucos eventos contrastando com pequenos grupos muito engajados.
 
