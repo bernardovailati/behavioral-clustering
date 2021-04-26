@@ -27,7 +27,7 @@
 
 ## Um pouco de contexto
 
-O plano gratuito da [Leads2b](https://leads2b.com/) foi lançado publicamente em Fevereiro de 2020 e 7 meses depois, no início de Agosto, cerca de 15 mil pessoas já haviam criado uma conta.
+O plano gratuito de uma startup de SaaS foi lançado publicamente em Fevereiro de 2020 e 7 meses depois, no início de Agosto, cerca de 15 mil pessoas já haviam criado uma conta.
 
 Como pesquisador e designer no time que projetou esse novo produto, precisávamos entender como as pessoas estavam engajando com ele, e quais eram os principais perfils.
 
@@ -98,7 +98,7 @@ Logo após a exportação de dados via API do Mixpanel, fiz uma limpeza:
 
 - removi todos os usuários que se registraram antes ou depois da série histórica (5 de Maio até 8 de Agosto)
 - removi as colunas de perfil com dados sensíveis (nome, telefone, email, empresa), ou irrelevantes (respostas dadas em campos de signup que não existem mais)
-- removi usuários que tivessem emails da @leads2b, para não incluir na análise nossas próprias contas de teste
+- removi usuários que tivessem emails da @startup, para não incluir na análise nossas próprias contas de teste
 - na tabela de eventos consolidados deixei apenas as colunas com o ID do usuário, o nome e a data do evento, e descartei todas as outras 20 e tantas que continham em qual navegador ele estava quando fez aquele evento, quantos créditos tinha, etc.
 
 Teoricamente tudo isso poderia ter sido feito direto na query da API, e ela já ter devolvido os dados bem limpos, mas como ela é bastante lenta e confusa, achei melhor baixar bruto e limpar na mão. Ao fim do processo, ficamos com cerca de 8200 perfils prontos para receberem o RFDV.
