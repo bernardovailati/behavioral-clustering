@@ -196,7 +196,7 @@ A partir dessa ótica podemos criar dois macro-grupos, nomear nossos cluster e j
 ### 1.1: Bounces (6568 usuários, 81%)
 
 - 6612 usuários na amostragem
-- 25% usam a Leads em um dispositivo móvel
+- 25% usam o produto em um dispositivo móvel
 - Fizeram apenas 10 eventos
 - Praticamente todos entram em apenas 1 dia, e não voltam mais
 
@@ -208,7 +208,7 @@ A partir dessa ótica podemos criar dois macro-grupos, nomear nossos cluster e j
 
 ### 1.2: Ocasionais (1230 usuários, 15%)
 
-- 4% usam a Leads em um dispositivo móvel
+- 4% usam o produto em um dispositivo móvel
 - Fazem 100 eventos, cerca de 7x mais que a mediana
 - Passaram quase 40 dias em contato com a plataforma
 - Nesse período, entraram em 5 dias distintos
@@ -216,7 +216,7 @@ A partir dessa ótica podemos criar dois macro-grupos, nomear nossos cluster e j
 
 ### 1.3: Frequentes (210 usuários, 2.6%)
 
-- 10% usam a Leads em um dispositivo móvel
+- 10% usam o produto em um dispositivo móvel
 - Fizeram 361 eventos, ou cerca de 26x mais que a mediana
 - Passaram quase 77 dias em contato com a plataforma, quase a série histórica completa
 - Nesse período, entraram em 23 dias distintos
@@ -233,7 +233,7 @@ A partir dessa ótica podemos criar dois macro-grupos, nomear nossos cluster e j
 ### 2.1: Mini-Baleias (79 usuários, 0.9%)
 
 - São muito parecidos com as Baleias, mas fazem quatro vezes menos eventos.
-- 2,5% usam a Leads em um dispositivo móvel
+- 2,5% usam o produto em um dispositivo móvel
 - Fizeram 1107 eventos, ou cerca de 79x mais que a mediana
 - Passaram quase 50 dias em contato com a plataforma, quase a série histórica completa
 - Nesse período entraram 12 dias distintos
