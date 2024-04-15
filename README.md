@@ -23,7 +23,7 @@
     - [Cruzar com dados do formulário de signup](#cruzar-com-dados-do-formulrio-de-signup)
     - [Partir para a pesquisa qualitativa](#partir-para-a-pesquisa-qualitativa)
     - [Entender a questão do mobile](#entender-a-questo-do-mobile)
-    - [Brincar com mais features](#brincar-com-mais-features
+    - [Brincar com mais features](#brincar-com-mais-features)
 
 ## Um pouco de contexto
 
