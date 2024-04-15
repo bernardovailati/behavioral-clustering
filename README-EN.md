@@ -1,3 +1,30 @@
+## The project
+- [A bit of context](#a-bit-of-context)
+- [What do we want to discover?](#what-do-we-want-to-discover-)
+- [Phase 1: Importing the data](#phase-1--importing-the-data)
+- [Phase 2: Preparing the data](#phase-2--preparing-the-data)
+- [Phase 3: Exploratory analysis](#phase-3--exploratory-analysis)
+- [Phase 4: Number of groups and the algorithm](#phase-4--number-of-groups-and-the-algorithm)
+  - [*Normalization*](#-normalization-)
+  - [*Determining the number of clusters*](#-determining-the-number-of-clusters-)
+  - [Running **K-means**](#running---k-means--)
+- [Phase 5: Finally, the long-awaited clusterization](#phase-5--finally--the-long-awaited-clusterization)
+  - [Macro-Group 1: Common Users (99% of users)](#macro-group-1--common-users--99--of-users-)
+  - [1.1: Bounces (6568 users, 81%)](#11--bounces--6568-users--81--)
+  - [1.2: Occasional (1230 users, 15%)](#12--occasional--1230-users--15--)
+  - [1.3: Frequent Users (210 users, 2.6%)](#13--frequent-users--210-users--26--)
+  - [Macro-Group 2: Outliers (>1% of users)](#macro-group-2--outliers---1--of-users-)
+  - [2.1: Mini-Whales (79 users, 0.9%)](#21--mini-whales--79-users--09--)
+  - [2.2: Whales (5 users, 0.06%)](#22--whales--5-users--006--)
+- [So, what are the next steps?](#so--what-are-the-next-steps-)
+  - [Redo the analysis with fresher data](#redo-the-analysis-with-fresher-data)
+  - [Put RFDV in production](#put-rfdv-in-production)
+  - [**Cross data with the signup form**](#--cross-data-with-the-signup-form--)
+  - [Proceed to qualitative research](#proceed-to-qualitative-research)
+  - [**Understand the mobile issue**](#--understand-the-mobile-issue--)
+  - [Experiment with more features](#experiment-with-more-features)
+
+
 ## A bit of context
 
 The freemium option of a SaaS startup was publicly launched in February 2020, and 7 months later, at the beginning of August, about 15,000 people had already created an account.
